@@ -121,6 +121,10 @@ strictly with the year: MIPS and Cortex-M A images coexist in 2014–2015.
   `Ver.2.01  D200 2008/08/18 for mass production`.
 * No SHA-1/MD5/AES constants were found in either image: in 2008 the "signature"
   is model/version matching plus CRC-16 integrity.
+* The same conventions are reported for Expeed 2 images in 2011 — embedded
+  JPEGs, SD card as `A:\`, A/B split, XMODEM-style CRC-16 (see
+  [references.md](references.md)). The D200 is not an isolated oddity; the
+  packaging lineage continues across the gap.
 
 ## 7. Per-sample scan output
 

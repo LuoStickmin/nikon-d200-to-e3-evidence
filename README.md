@@ -53,15 +53,35 @@ a **plaintext** container (`D5__0150.bin`). It prints module names, sizes,
 CRC status, the CPU-family signature, the in-image banner and both stamp
 copies. It never writes to the input and performs no decryption.
 
-## Scope and rules
+## Prior work
 
-* **No firmware binaries here.** Nikon firmware is copyrighted; the repo holds
-  only scripts, tables and short quoted strings needed as evidence.
-* **No decryption keys.** Containers must be decrypted before scanning.
-* Not affiliated with Nikon. Nothing here establishes that a modified image is
-  accepted by a camera; CRC-16 is integrity, not authenticity.
-* Evidence entries are expected to be *reproducible*: every claim maps to a
-  `nikon_fw_scan.py` output line.
+The 2011 community work already documented the *decrypt → split A/B → patch →
+re-set checksums → re-encrypt* workflow and the XMODEM-style CRC-16 on
+D7000 / D5100 / D3100 / D300S / D3S. That is why this repo treats Expeed 2 as
+"already modern" and puts the real gap at Expeed 1. Sources, links and caveats:
+[docs/references.md](docs/references.md).
+
+## Notice
+
+This is an unofficial research project. It is **not affiliated with, endorsed
+by, or supported by Nikon Corporation**.
+
+* **No firmware, no keys.** Nikon firmware images are copyrighted; this repo
+  contains only scripts, tables and short quoted strings used as evidence.
+  Do not open PRs containing `.bin`, `.exe` or decrypted images.
+* **Research and interoperability only.** Reverse engineering is regulated
+  differently across jurisdictions; you are responsible for complying with the
+  law where you are.
+* **No warranty.** Flashing modified firmware can brick a camera. Nothing here
+  has been validated on hardware.
+* **CRC-16 is integrity, not authenticity.** A passing CRC only means the
+  container is self-consistent; it says nothing about origin or trust.
+* **Trademarks** belong to their respective owners; product and firmware names
+  are used only to identify samples.
+* **Third-party work** cited in [docs/references.md](docs/references.md) remains
+  under its authors' terms; it is referenced, not redistributed.
+* **Evidence entries are expected to be reproducible**: every claim maps to a
+  `nikon_fw_scan.py` output line, or is explicitly marked as inference.
 
 ## Layout
 
@@ -70,6 +90,7 @@ README.md               this file
 README.zh-CN.md         中文摘要
 docs/evidence.md        packaging spec + full evidence table + D200 details
 docs/e3-gap.md          what is missing for Expeed 1/2/3, and how to check it
+docs/references.md      prior art, community sources, caveats
 tools/nikon_fw_scan.py  the scanner
 samples/README.md       where official firmware comes from; do not commit it
 ```
